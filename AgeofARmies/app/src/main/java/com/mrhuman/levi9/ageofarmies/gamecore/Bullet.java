@@ -89,24 +89,23 @@ public class Bullet {
 
 
 	public void step() {
-/*	    float t = (System.currentTimeMillis()-creationTime)/1000;
-        x = cannonX+t* speedX * (targetX - cannonX) / distance;
+	    double t = (System.currentTimeMillis()-creationTime)/1000.0;
         x = cannonX+t* speedX * (targetX - cannonX) / distance;
         y = cannonY+t*speedX * (targetY - cannonY) / distance;
-        height += speedY;
-        speedY =  initialSpeed * Math.sqrt(2) / 2 - t*GRAVITATION;
-*/
-        float timeElapsed = (System.currentTimeMillis()-lastIteration)/1000;
+        //height += speedY;
+        //speedY =  initialSpeed * Math.sqrt(2) / 2 - t*GRAVITATION;
+
+        /*float timeElapsed = (System.currentTimeMillis()-lastIteration)/1000;
         lastIteration = System.currentTimeMillis();
         x +=speedX * timeElapsed * (targetX - cannonX) / distance;
         y += speedX * timeElapsed * (targetY - cannonY) / distance;
         height += speedY * timeElapsed;
-        speedY =  speedY - timeElapsed*GRAVITATION;
+        speedY =  speedY - timeElapsed*GRAVITATION;*/
 
     }
 	
 	public boolean isDestroyed() {
-	    return (Math.abs(targetX - cannonX) < 0.01) && (Math.abs(targetY - cannonY) < 0.01) && (height < 0.01);
-	}
+	    return (Math.abs(targetX - x) < 0.5) && (Math.abs(targetY - y) < 0.5);
+}
 
 }
