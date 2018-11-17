@@ -17,7 +17,7 @@ public class Factory extends Building {
     }
 
     static final int INITIAL_HEALTH = 100;
-	private static final int RESOURCE_GAIN = 0;
+	private static final int RESOURCE_GAIN = 10;
 	private static final int MILISECONDS = 3000;
 	
 	private long lastGainTime;

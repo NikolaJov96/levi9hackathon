@@ -19,7 +19,7 @@ public class MainBuilding extends Building {
 	}
 
 	// amount of money this building produces
-	private static final int RESOURCE_GAIN = 0;
+	private static final int RESOURCE_GAIN = 3;
 	// period of producing money
 	private static final int MILISECONDS = 5000;
 	// last time the building produced money

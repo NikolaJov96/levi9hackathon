@@ -52,7 +52,7 @@ public class GameModel extends Thread implements Serializable {
     }
 
     private static final int DEFAULT_DIMENSION_Y = 30;
-	private static final int INITIAL_RESOURCES = 100;
+	private static final int INITIAL_RESOURCES = 150;
 	
 	GameModelParent parent;
 	private GameBot gameBot;
