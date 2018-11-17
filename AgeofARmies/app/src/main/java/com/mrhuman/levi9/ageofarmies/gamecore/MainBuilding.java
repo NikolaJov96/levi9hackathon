@@ -4,7 +4,7 @@ public class MainBuilding extends Building {
 
 	// amount of money to build this building
 	static final int COST = 100;
-	private static final int INITIAL_HEALTH = 100;
+	static final int INITIAL_HEALTH = 100;
 	// amount of money this building produces
 	private static final int RESOURCE_GAIN = 10;
 	// period of producing money
@@ -18,6 +18,16 @@ public class MainBuilding extends Building {
 		lastGainTime = System.currentTimeMillis();
 	}
 
+
+	@Override
+	public int getBuldingType() {
+		return 0;
+	}
+
+	@Override
+	public int getInitialHealth() {
+		return INITIAL_HEALTH;
+	}
 
 	@Override
 	public int cost() {

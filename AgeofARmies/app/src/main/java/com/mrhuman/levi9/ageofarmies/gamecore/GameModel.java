@@ -95,14 +95,19 @@ public class GameModel extends Thread implements Serializable {
         return resources[player] >= cost;
 	}
 
-	public synchronized void heal(int player, int x, int y) {
+	public synchronized boolean heal(int player, int x, int y) {
 	    Building b = board.at(x, y);
-	    if (b.player != player) return;
+	    if(b == null)
+	        return false;
+	    if (b.player != player)
+	        return false;
 
-	    if (resources[player] >= Building.HEAL_COST) {
+	    if (resources[player] >= Building.HEAL_COST && b.health < b.getInitialHealth()) {
 	        b.heal();
 	        resources[player] -= Building.HEAL_COST;
+	        return true;
         }
+        return false;
 	}
 	public synchronized void upgrade(int player, int x, int y) {
 	}
@@ -138,7 +143,7 @@ public class GameModel extends Thread implements Serializable {
                     if (b.isDestroyed()) {
                         Building target = board.at(b.targetX, b.targetY);
                         if (target != null) {
-                            target.hit(Bullet.demage);
+                            target.hit(Bullet.damage);
                         }
                         bullets.remove(b);
                     }

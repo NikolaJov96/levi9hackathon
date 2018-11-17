@@ -4,7 +4,7 @@ package com.mrhuman.levi9.ageofarmies.gamecore;
 public class Cannon extends Building {
 
 	static final int COST = 40;
-	private static final int INITIAL_HEALTH = 100;
+	static final int INITIAL_HEALTH = 100;
 	private static final int MILISECONDS = 3000;
 	
 	private long lastShotTime;
@@ -15,6 +15,16 @@ public class Cannon extends Building {
 		lastShotTime = System.currentTimeMillis();
 	}
 
+
+	@Override
+	public int getBuldingType() {
+		return 2;
+	}
+
+	@Override
+	public int getInitialHealth() {
+		return INITIAL_HEALTH;
+	}
 
 	@Override
 	public int cost() {

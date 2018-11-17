@@ -36,6 +36,9 @@ public abstract class Building {
 		return y;
 	}
 
+	public abstract int getBuldingType();
+
+	public abstract int getInitialHealth();
 
 	public static int healCost() {
 		return HEAL_COST;

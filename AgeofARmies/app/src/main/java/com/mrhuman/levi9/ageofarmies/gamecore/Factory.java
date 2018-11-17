@@ -3,7 +3,7 @@ package com.mrhuman.levi9.ageofarmies.gamecore;
 public class Factory extends Building {
 
 	static final int COST = 20;
-	private static final int INITIAL_HEALTH = 100;
+	static final int INITIAL_HEALTH = 100;
 	private static final int RESOURCE_GAIN = 60;
 	private static final int MILISECONDS = 3000;
 	
@@ -16,7 +16,17 @@ public class Factory extends Building {
 	}
 
 
-	@Override
+    @Override
+    public int getBuldingType() {
+        return 1;
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return INITIAL_HEALTH;
+    }
+
+    @Override
 	public int cost() {
 		return COST;
 	}
