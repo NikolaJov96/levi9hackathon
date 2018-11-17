@@ -1,9 +1,9 @@
-package gamecore;
+package com.mrhuman.levi9.ageofarmies.gamecore;
 
 public class MainBuilding extends Building {
 
 	// amount of money to build this building
-	private static final int COST = 100;
+	static final int COST = 100;
 	private static final int INITIAL_HEALTH = 100;
 	// amount of money this building produces
 	private static final int RESOURCE_GAIN = 10;
@@ -21,22 +21,26 @@ public class MainBuilding extends Building {
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
-		return 0;
+		return COST;
 	}
 
 
 	@Override
 	public void heal() {
-		// TODO Auto-generated method stub
-		
+		health += HEAL_STEP;
+		if(health > INITIAL_HEALTH)
+			health = INITIAL_HEALTH;
 	}
 
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-		
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastGainTime >= MILISECONDS) {
+			gameModel.resources[player] += RESOURCE_GAIN;
+			lastGainTime = currentTime;
+			gameModel.parent.gotResources(x, y, RESOURCE_GAIN);
+		}
 	}
 
 

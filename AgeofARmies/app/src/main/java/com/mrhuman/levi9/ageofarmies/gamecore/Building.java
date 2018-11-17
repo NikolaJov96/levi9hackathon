@@ -1,22 +1,22 @@
-package gamecore;
+package com.mrhuman.levi9.ageofarmies.gamecore;
 
 public abstract class Building {
 	// number of buildings used for id
 	private static int counter = 0;
 
-	private GameModel gameModel;
+	protected GameModel gameModel;
 	// position
-	private int x;
-	private int y;
-	private float angle;
-	private int player;
-	private int health;
-	private int level;
-	
-	private static final int HEAL_STEP = 10;
-	private static final int HEAL_COST = 10;
+	protected int x;
+	protected int y;
+	protected float angle;
+	protected int player;
+	protected int health;
+	protected int level;
 
-	private int id; 
+	protected static final int HEAL_STEP = 10;
+	static final int HEAL_COST = 10;
+
+	protected int id;
 	
 	public Building(GameModel gameModel, int x, int y, int player, int health, int level) {
 		this.gameModel = gameModel;
@@ -27,7 +27,16 @@ public abstract class Building {
 		this.level = level;
 		id = ++counter;
 	}
-	
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+
 	public static int healCost() {
 		return HEAL_COST;
 	}
@@ -38,6 +47,7 @@ public abstract class Building {
 	public void hit(int damage) {
 		health -= damage;
 		if (health < 0) health = 0;
+		gameModel.parent.lostHealth(x, y, damage);
 	}
 	
 	public abstract void heal();

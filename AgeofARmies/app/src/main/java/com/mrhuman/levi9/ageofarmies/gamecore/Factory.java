@@ -1,8 +1,8 @@
-package gamecore;
+package com.mrhuman.levi9.ageofarmies.gamecore;
 
 public class Factory extends Building {
 
-	private static final int COST = 20;
+	static final int COST = 20;
 	private static final int INITIAL_HEALTH = 100;
 	private static final int RESOURCE_GAIN = 60;
 	private static final int MILISECONDS = 3000;
@@ -10,7 +10,7 @@ public class Factory extends Building {
 	private long lastGainTime;
 	
 
-	public Factory(GameModel gameModel, int x, int y, int player, int health, int level) {
+	public Factory(GameModel gameModel, int x, int y, int player) {
 		super(gameModel, x, y, player, INITIAL_HEALTH, 0);
 		lastGainTime = System.currentTimeMillis();
 	}
@@ -18,22 +18,25 @@ public class Factory extends Building {
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
-		return 0;
+		return COST;
 	}
-
 
 	@Override
 	public void heal() {
-		// TODO Auto-generated method stub
-		
+		health += HEAL_STEP;
+		if(health > INITIAL_HEALTH)
+			health = INITIAL_HEALTH;
 	}
 
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-		
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastGainTime >= MILISECONDS) {
+			gameModel.resources[player] += RESOURCE_GAIN;
+			lastGainTime = currentTime;
+			gameModel.parent.gotResources(x, y, RESOURCE_GAIN);
+		}
 	}
 
 }
