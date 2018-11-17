@@ -2,7 +2,7 @@ package com.mrhuman.levi9.ageofarmies.gamecore;
 
 public class Factory extends Building {
 
-	static final int COST = 20;
+	static final int COST = 80;
 
     public static int getCOST() {
         return COST;
