@@ -3,7 +3,7 @@ package com.mrhuman.levi9.ageofarmies.gamecore;
 
 public class Cannon extends Building {
 
-	static final int COST = 110;
+	static final int COST = 50;
 	static final int INITIAL_HEALTH = 100;
 	private static final int MILISECONDS = 3000;
 	
