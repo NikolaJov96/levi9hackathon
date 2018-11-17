@@ -24,11 +24,21 @@ public class Board {
 	}
 	
 	public Building at(int x, int y) {
+	    for(int i = buildings.size() - 1; i >= 0; i--)
+        {
+            Building b =buildings.get(i);
+            if(b == null)
+                return null;
+            if (b.getX() == x && b.getY() == y)
+                return b;
+        }
+        return null;
+	    /*
 		for (Building building : buildings) {
-			if(building.getX() == x && building.getY() == y)
+			if (building.getX() == x && building.getY() == y)
 				return building;
 		}
-		return null;
+		return null;*/
 	}
 	
 	public Building remove(int x, int y) {

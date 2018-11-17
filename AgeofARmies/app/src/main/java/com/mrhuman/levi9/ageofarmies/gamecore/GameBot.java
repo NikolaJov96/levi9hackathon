@@ -78,7 +78,16 @@ public class GameBot extends Thread {
 
 	public void run() {
 		while (gameModel.isRunning()) {
-			gameModel.lock();
+            synchronized(this) {
+                while (gameModel.isLocked())
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+            }
+		    gameModel.lock();
 
             switch (difficulty) {
                 case 0:

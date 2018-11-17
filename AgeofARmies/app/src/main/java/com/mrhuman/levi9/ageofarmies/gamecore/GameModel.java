@@ -65,7 +65,7 @@ public class GameModel extends Thread implements Serializable {
 	private MainBuilding mainBuildings[];
 	
 	private boolean running;
-	private volatile boolean locked = false;
+	volatile boolean locked = false;
 
 	public GameModel(GameModelParent parent) {
 		this.parent = parent;
