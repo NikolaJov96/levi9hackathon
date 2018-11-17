@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
     compileSdkVersion 28
@@ -35,3 +36,44 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+
+sceneform.asset('sampledata/bullet/Neptune_1240.obj',
+        'default',
+        'sampledata/bullet/Neptune_1240.sfa',
+        'src/main/assets/bullet')
+
+sceneform.asset('sampledata/cannon1/model.obj',
+        'default',
+        'sampledata/cannon1/model.sfa',
+        'src/main/assets/cannon1')
+
+sceneform.asset('sampledata/cannon2/Cannon.obj',
+        'default',
+        'sampledata/cannon2/Cannon.sfa',
+        'src/main/assets/Cannon2')
+
+sceneform.asset('sampledata/castle1/SM_Castle.obj',
+        'default',
+        'sampledata/castle1/SM_Castle.sfa',
+        'src/main/assets/castle1')
+
+sceneform.asset('sampledata/castle2/SM_Fort.obj',
+        'default',
+        'sampledata/castle2/SM_Fort.sfa',
+        'src/main/assets/castle2')
+
+sceneform.asset('sampledata/farm1/Farm.obj',
+        'default',
+        'sampledata/farm1/Farm.sfa',
+        'src/main/assets/farm1')
+
+sceneform.asset('sampledata/farm2/Barn no ground.obj',
+        'default',
+        'sampledata/farm2/Barn no ground.sfa',
+        'src/main/assets/farm2')
+
+sceneform.asset('sampledata/tile/model.obj',
+        'default',
+        'sampledata/tile/model.sfa',
+        'src/main/assets/tile')
