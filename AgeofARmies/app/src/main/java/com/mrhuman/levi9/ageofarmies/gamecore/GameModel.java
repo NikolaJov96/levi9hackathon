@@ -11,6 +11,7 @@ public class GameModel extends Thread implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_DIMENSION_X = 30;
 	private static final int DEFAULT_DIMENSION_Y = 30;
+	private static final int INITIAL_RESOURCES = 100;
 	
 	GameModelParent parent;
 	private GameBot gameBot;
@@ -25,22 +26,23 @@ public class GameModel extends Thread implements Serializable {
 	private boolean running;
 	private volatile boolean locked = false;
 
-	public GameModel(GameModelParent parent, GameBot gameBot) {
+	public GameModel(GameModelParent parent) {
 		this.parent = parent;
-		this.gameBot = gameBot;
 		board = new Board(DEFAULT_DIMENSION_X, DEFAULT_DIMENSION_Y);
 		initModel();
 	}
 
-	public GameModel(GameModelParent parent, GameBot gameBot, int dimX, int dimY) {
+	public GameModel(GameModelParent parent, int dimX, int dimY) {
 		this.parent = parent;
-		this.gameBot = gameBot;
 		board = new Board(dimX, dimY);
 		initModel();
 	}
 
 	private void initModel() {
+	    gameBot = new GameBot(this);
 		resources = new int[2];
+		resources[0] = INITIAL_RESOURCES;
+		resources[1] = INITIAL_RESOURCES;
 		mainBuildings = new MainBuilding[2];
 		build(0, 0, 1,1);
 		build(1, 0, board.dimX-2, board.dimY-2);
