@@ -7,4 +7,6 @@
     <string name="battle_button">Battle!</string>
 
     <string name="title_activity_game">GameActivity</string>
+
+    <string name="plane_finding">Searching for surfaces&#8230;</string>
 </resources>
