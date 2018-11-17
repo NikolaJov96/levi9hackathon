@@ -3,7 +3,20 @@ package com.mrhuman.levi9.ageofarmies.gamecore;
 public class Factory extends Building {
 
 	static final int COST = 20;
-	static final int INITIAL_HEALTH = 100;
+
+    public static int getCOST() {
+        return COST;
+    }
+
+    public static int getResourceGain() {
+        return RESOURCE_GAIN;
+    }
+
+    public static int getMILISECONDS() {
+        return MILISECONDS;
+    }
+
+    static final int INITIAL_HEALTH = 100;
 	private static final int RESOURCE_GAIN = 60;
 	private static final int MILISECONDS = 3000;
 	

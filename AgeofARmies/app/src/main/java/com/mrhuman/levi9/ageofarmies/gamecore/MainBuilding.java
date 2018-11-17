@@ -5,6 +5,19 @@ public class MainBuilding extends Building {
 	// amount of money to build this building
 	static final int COST = 100;
 	static final int INITIAL_HEALTH = 100;
+
+	public static int getCOST() {
+		return COST;
+	}
+
+	public static int getResourceGain() {
+		return RESOURCE_GAIN;
+	}
+
+	public static int getMILISECONDS() {
+		return MILISECONDS;
+	}
+
 	// amount of money this building produces
 	private static final int RESOURCE_GAIN = 10;
 	// period of producing money

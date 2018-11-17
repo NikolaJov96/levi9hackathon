@@ -13,6 +13,50 @@ public class Bullet {
         return x;
     }
 
+    public static int getDamage() {
+        return damage;
+    }
+
+    public static float getGRAVITATION() {
+        return GRAVITATION;
+    }
+
+    public int getCannonX() {
+        return cannonX;
+    }
+
+    public int getCannonY() {
+        return cannonY;
+    }
+
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getInitialSpeed() {
+        return initialSpeed;
+    }
+
+    public double getSpeedX() {
+        return speedX;
+    }
+
+    public double getSpeedY() {
+        return speedY;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
     public double getY() {
         return y;
     }

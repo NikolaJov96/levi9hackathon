@@ -5,6 +5,19 @@ import java.util.Random;
 public class GameBot extends Thread {
 
 	private static final int SLEEP_MILIS = 500;
+
+    public static int getSleepMilis() {
+        return SLEEP_MILIS;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
     private int difficulty = 0;
 	GameModel gameModel;
 	

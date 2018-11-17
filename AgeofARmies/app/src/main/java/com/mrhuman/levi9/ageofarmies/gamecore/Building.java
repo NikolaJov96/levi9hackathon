@@ -8,8 +8,29 @@ public abstract class Building {
 	// position
 	protected int x;
 	protected int y;
-	protected float angle;
-	protected int player;
+	protected double angle;
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public int getPlayer() {
+        return player;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    protected int player;
 	protected int health;
 	protected int level;
 

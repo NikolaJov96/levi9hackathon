@@ -8,7 +8,14 @@ public class Cannon extends Building {
 	private static final int MILISECONDS = 3000;
 	
 	private long lastShotTime;
-	
+
+	public static int getCOST() {
+		return COST;
+	}
+
+	public static int getMILISECONDS() {
+		return MILISECONDS;
+	}
 
 	public Cannon(GameModel gameModel, int x, int y, int player) {
 		super(gameModel, x, y, player, INITIAL_HEALTH, 0);
@@ -48,7 +55,7 @@ public class Cannon extends Building {
 			Building target = null;
 			for (Building building: gameModel.board.buildings) {
 				double distance = Math.pow(x - building.getX(),2) + Math.pow(y - building.getY(),2);
-				if (distance < minDistance) {
+				if (distance < minDistance && building.player != player) {
 					minDistance = distance;
 					target = building;
 				}

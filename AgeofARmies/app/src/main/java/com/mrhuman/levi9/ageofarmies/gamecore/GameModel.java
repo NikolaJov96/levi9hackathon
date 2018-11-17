@@ -10,7 +10,48 @@ public class GameModel extends Thread implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_DIMENSION_X = 30;
-	private static final int DEFAULT_DIMENSION_Y = 30;
+
+    public static int getDefaultDimensionX() {
+        return DEFAULT_DIMENSION_X;
+    }
+
+    public static int getDefaultDimensionY() {
+        return DEFAULT_DIMENSION_Y;
+    }
+
+    public static int getInitialResources() {
+        return INITIAL_RESOURCES;
+    }
+
+    public GameModelParent getParent() {
+        return parent;
+    }
+
+    public GameBot getGameBot() {
+        return gameBot;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public int[] getResources() {
+        return resources;
+    }
+
+    public MainBuilding[] getMainBuildings() {
+        return mainBuildings;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    private static final int DEFAULT_DIMENSION_Y = 30;
 	private static final int INITIAL_RESOURCES = 100;
 	
 	GameModelParent parent;
@@ -39,7 +80,6 @@ public class GameModel extends Thread implements Serializable {
 	}
 
 	private void initModel() {
-	    gameBot = new GameBot(this);
 		resources = new int[2];
 		resources[0] = INITIAL_RESOURCES;
 		resources[1] = INITIAL_RESOURCES;
