@@ -24,9 +24,7 @@ import com.google.ar.core.exceptions.UnavailableException;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.HitTestResult;
-import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.mrhuman.levi9.ageofarmies.gamecore.GameModel;
 import com.mrhuman.levi9.ageofarmies.gamecore.GameModelParent;
 
 import java.util.concurrent.CompletableFuture;
@@ -286,7 +284,7 @@ public class GameActivity extends AppCompatActivity implements GameModelParent {
 
     @Override
     public void gotResources(int x, int y, int amount) {
-
+        guiAdapter.gotResources();
     }
 
     @Override
@@ -295,8 +293,9 @@ public class GameActivity extends AppCompatActivity implements GameModelParent {
     }
 
     @Override
-    public void gameOver() {
+    public void gameOver(int player) {
         guiAdapter.finish();
         finish();
     }
+
 }

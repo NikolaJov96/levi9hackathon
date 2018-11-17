@@ -9,4 +9,8 @@
     <string name="title_activity_game">GameActivity</string>
 
     <string name="plane_finding">Searching for surfaces&#8230;</string>
+    <string name="label_actions">Actions:</string>
+    <string name="label_repair">Repair</string>
+    <string name="label_farm">Farm</string>
+    <string name="label_cannon">Cannon</string>
 </resources>

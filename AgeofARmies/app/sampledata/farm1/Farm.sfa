@@ -115,7 +115,7 @@
     file: 'sampledata/farm1/Farm.obj',
     name: 'Farm',
     recenter: 'root',
-    scale: 0.000183,
+    scale: 0.00001,
   },
   version: '0.52:1',
 }

@@ -115,7 +115,7 @@
     file: 'sampledata/castle1/SM_Castle.obj',
     name: 'SM_Castle',
     recenter: 'root',
-    scale: 0.012219000000000001,
+    scale: 0.001719000000000001,
   },
   version: '0.52:1',
 }

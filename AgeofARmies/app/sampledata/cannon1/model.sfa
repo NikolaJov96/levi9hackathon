@@ -193,7 +193,7 @@
     file: 'sampledata/cannon1/model.obj',
     name: 'model',
     recenter: 'root',
-    scale: 0.944156,
+    scale: 0.074156,
   },
   version: '0.52:1',
 }
