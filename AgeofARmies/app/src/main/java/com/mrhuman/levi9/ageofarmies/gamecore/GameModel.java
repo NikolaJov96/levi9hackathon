@@ -110,8 +110,10 @@ public class GameModel extends Thread implements Serializable {
         }
 
         if (resources[player] >= cost) {
-            if (board.add(b, x, y) == true)
+            if (board.add(b, x, y) == true) {
+                resources[player] -= cost;
                 return b;
+            }
             else
                 return  null;
         }
