@@ -1,30 +1,46 @@
 package com.mrhuman.levi9.ageofarmies;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.ar.core.Anchor;
 import com.google.ar.core.Frame;
+import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
+import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableException;
+import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
+import com.google.ar.sceneform.HitTestResult;
+import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+import com.mrhuman.levi9.ageofarmies.gamecore.GameModel;
+import com.mrhuman.levi9.ageofarmies.gamecore.GameModelParent;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements GameModelParent {
 
     public static final String WIDTH_ARG = "WIDTH_ARG";
     public static final String HEIGHT_ARG = "HEIGHT_ARG";
     public static final String SCALE_ARG = "SCALE_ARG";
+
+    private int width;
+    private int height;
+    private int scale;
 
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler hideHandler = new Handler();
@@ -33,20 +49,22 @@ public class GameActivity extends AppCompatActivity {
     private boolean installRequested;
 
     private ArSceneView arSceneView;
+    private GUIAdapter guiAdapter;
 
     // 3D renderable models
-    private ModelRenderable bulletRenderable;
-    private ModelRenderable cannon1Renderable;
-    private ModelRenderable cannon2Renderable;
-    private ModelRenderable castle1Renderable;
-    private ModelRenderable castle2Renderable;
-    private ModelRenderable farm1Renderable;
-    private ModelRenderable farm2Renderable;
-    private ModelRenderable tileRenderable;
+    public ModelRenderable bulletRenderable;
+    public ModelRenderable cannon1Renderable;
+    public ModelRenderable cannon2Renderable;
+    public ModelRenderable castle1Renderable;
+    public ModelRenderable castle2Renderable;
+    public ModelRenderable farm1Renderable;
+    public ModelRenderable farm2Renderable;
+    public ModelRenderable tileRenderable;
 
-    // True once scene is loaded
     private boolean hasFinishedLoading = false;
+    private boolean hasPlacedBoard = false;
 
+    private GestureDetector gestureDetector;
     private Snackbar loadingMessageSnackbar = null;
 
     @Override
@@ -56,6 +74,14 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         arSceneView = findViewById(R.id.ar_view);
+
+        Intent intent = getIntent();
+        if (!intent.hasExtra(WIDTH_ARG) || !intent.hasExtra(HEIGHT_ARG) || !intent.hasExtra(SCALE_ARG)) {
+            return;
+        }
+        width = intent.getIntExtra(WIDTH_ARG, 1); // get default from GameModel
+        height = intent.getIntExtra(HEIGHT_ARG, 1);
+        scale = intent.getIntExtra(SCALE_ARG, 1);
 
         CompletableFuture<ModelRenderable> bulletStage =
                 ModelRenderable.builder().setSource(this, Uri.parse("bullet.sfb")).build();
@@ -111,6 +137,34 @@ public class GameActivity extends AppCompatActivity {
                 }
         );
 
+        gestureDetector =
+                new GestureDetector(
+                        this,
+                        new GestureDetector.SimpleOnGestureListener() {
+                            @Override
+                            public boolean onSingleTapUp(MotionEvent e) {
+                                if (!hasPlacedBoard) {
+                                    Frame frame = arSceneView.getArFrame();
+                                    if (tryPlaceBoard(e, frame)) {
+                                        hasPlacedBoard = true;
+                                    }
+                                }
+                                return true;
+                            }
+
+                            @Override
+                            public boolean onDown(MotionEvent e) { return true; }
+                        });
+
+        arSceneView
+                .getScene()
+                .setOnTouchListener(
+                        (HitTestResult hitTestResult, MotionEvent event) -> {
+                            if (!hasFinishedLoading) { return false; }
+                            return gestureDetector.onTouchEvent(event);
+
+                        });
+
         arSceneView
                 .getScene()
                 .addOnUpdateListener(
@@ -132,6 +186,24 @@ public class GameActivity extends AppCompatActivity {
                         });
 
         ARCoreUtils.requestCameraPermission(this, RC_PERMISSIONS);
+    }
+
+    private boolean tryPlaceBoard(MotionEvent tap, Frame frame) {
+        if (tap != null && frame.getCamera().getTrackingState() == TrackingState.TRACKING) {
+            for (HitResult hit : frame.hitTest(tap)) {
+                Trackable trackable = hit.getTrackable();
+                if (trackable instanceof Plane && ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
+                    Anchor anchor = hit.createAnchor();
+                    AnchorNode anchorNode = new AnchorNode(anchor);
+                    anchorNode.setParent(arSceneView.getScene());
+                    guiAdapter = new GUIAdapter(width, height, scale, this);
+                    anchorNode.addChild(guiAdapter);
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -212,4 +284,19 @@ public class GameActivity extends AppCompatActivity {
         loadingMessageSnackbar = null;
     }
 
+    @Override
+    public void gotResources(int x, int y, int amount) {
+
+    }
+
+    @Override
+    public void lostHealth(int x, int y, int amount) {
+
+    }
+
+    @Override
+    public void gameOver() {
+        guiAdapter.finish();
+        finish();
+    }
 }
