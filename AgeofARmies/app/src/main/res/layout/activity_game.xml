@@ -6,15 +6,11 @@
     android:background="#0099cc"
     tools:context=".GameActivity">
 
-    <TextView
-        android:id="@+id/fullscreen_content"
+    <com.google.ar.sceneform.ArSceneView
+        android:id="@+id/ar_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="Dummy content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center"
+        android:keepScreenOn="true"/>
 
 </FrameLayout>
