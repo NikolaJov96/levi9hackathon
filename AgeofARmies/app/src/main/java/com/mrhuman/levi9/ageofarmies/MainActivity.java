@@ -91,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 int width = widthSeekBar.getProgress();
                 int height = heightSeekBar.getProgress();
                 int scale =  scaleSeekBar.getProgress();
+
+                Intent intent = new Intent(v.getContext(), GameActivity.class);
+                intent.putExtra(GameActivity.WIDTH_ARG, width);
+                intent.putExtra(GameActivity.HEIGHT_ARG, height);
+                intent.putExtra(GameActivity.SCALE_ARG, scale);
+
+                startActivity(intent);
             }
         });
 
