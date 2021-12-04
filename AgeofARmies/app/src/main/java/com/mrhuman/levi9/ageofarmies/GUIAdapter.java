@@ -72,7 +72,7 @@ class BuildingNode extends Node {
         newBuilding = new Node();
         newBuilding.setParent(this);
         newBuilding.setLocalPosition(new Vector3(0.0f , 0.25f, 0.0f));
-        newBuilding.setLocalScale(new Vector3(0.7f, 0.7f, 0.7f));
+        newBuilding.setLocalScale(new Vector3(0.4f, 0.4f, 0.4f));
         ViewRenderable.builder()
                 .setView(parent.getGameActivity(), R.layout.view_new_building)
                 .build()
